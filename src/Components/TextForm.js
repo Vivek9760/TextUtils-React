@@ -26,8 +26,10 @@ function TextForm(props){
     }
     
     const copyOnClick = () => {
+        // var text = document.getElementById("myBox");
+        // text.select();
         navigator.clipboard.writeText(text);
-        props.showAlert("Text Copied","success");
+        props.showAlert("Copy to clipboard","success");
     }
 
     const handleOnChange =(event)=>{
@@ -61,11 +63,11 @@ function TextForm(props){
      return(
         <>
         <div className="mb-3 my-2">
-  <h2 style={{color:props.mode==="light"?"black":"whitesmoke"}} >{props.heading}</h2>
+  <h2 style={{color:props.mode==="light"?"black":"whitesmoke"}} className="mb-3" >{props.heading}</h2>
   <textarea className="form-control" id="myBox" rows="5"  value={text} onChange={handleOnChange} style={{backgroundColor:props.mode ==='light'?"white":"#4F4F4F",color:props.mode ==='light'?"black":"whitesmoke"}}  placeholder="Enter your text here..."></textarea>
   <button className="btn btn-outline-secondary my-2 mx-2"  onClick={handleClearClick}>Clear Text</button>
   <button className="btn btn-danger my-2 mx-2"  onClick={handleUpClick}>Convert to Uppercase</button>
-  <button className="btn btn-success my-2 mx-2" title="Copy to clipboard"  onClick={copyOnClick}>Copy Text</button>
+  <button className="btn btn-success my-2 mx-2"  onClick={copyOnClick}>Copy Text</button>
   <button className="btn btn-primary my-2 mx-2"  onClick={handleLowClick}>Convert to Lowercase</button>
   <button className="btn btn-warning my-2 mx-2"  onClick={handleExtraSpaces}>Remove Extra Spaces</button>
  
@@ -74,9 +76,9 @@ function TextForm(props){
 <h3>Your text summary</h3>
 <p>Words = {countWords(text)}</p>
 <p>Characters = {text.length} </p>
-<p>You read this para in approx {0.008 * text.split(" ").length} Minutes</p>
+<p>You read this para in approx {0.008 * text.split(" ").filter((text)=>{return text.length!==0}).length} Minutes</p>
 <h2>Preview</h2>
-<p style={{border:text.length>0?"none":`2px solid ${props.mode==="light"?"black":"white"}`,borderRadius:text.length>0?"none":"8px",display:"inline",padding:"0px 3px"}}>{text.length>0?text:"Enter Something in the text box to preview it ..."}</p>
+<p /*style={{border:text.length>0?"none":`2px solid ${props.mode==="light"?"black":"white"}`,borderRadius:text.length>0?"none":"8px",display:"inline",padding:"0px 3px"}}*/>{text.length>0?text:"Nothing to preview..."}</p>
 
 </div>
 </>
